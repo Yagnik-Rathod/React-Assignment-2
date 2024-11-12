@@ -1,9 +1,9 @@
 $(document).ready(function() {
-    // Function to fetch weather data
+
     const fetchWeather = (city) => {
         const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=35.6895&longitude=139.6917&hourly=temperature_2m,weathercode&timezone=Asia/Tokyo`;
         
-        // For demonstration, using fixed coordinates (Tokyo). You can replace with geocoding API for dynamic coordinates.
+
         
         $.ajax({
             url: apiUrl,
@@ -24,7 +24,7 @@ $(document).ready(function() {
         });
     };
 
-    // Function to get weather description based on weather code
+
     const getWeatherDescription = (code) => {
         switch(code) {
             case 0: return "Clear sky";
@@ -39,7 +39,6 @@ $(document).ready(function() {
         }
     };
 
-    // Function to get the weather icon based on weather code
     const getWeatherIcon = (code) => {
         // Example icon URLs; you can customize these
         switch(code) {
@@ -51,7 +50,6 @@ $(document).ready(function() {
         }
     };
 
-    // Get weather when button is clicked
     $('#getWeather').on('click', function() {
         const city = $('#cityInput').val().trim();
         if (city) {
@@ -59,7 +57,7 @@ $(document).ready(function() {
         }
     });
 
-    // Refresh weather when button is clicked
+
     $('#refreshWeather').on('click', function() {
         const city = $('#cityInput').val().trim();
         if (city) {
