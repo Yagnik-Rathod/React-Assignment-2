@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f9fc;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .success {
+            color: green;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <form id="myForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <span class="error" id="nameError"></span>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <span class="error" id="emailError"></span>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="">--Select Gender--</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <span class="error" id="genderError"></span>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <span class="error" id="passwordError"></span>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword">
+            <span class="error" id="confirmPasswordError"></span>
+
+            <label>
+                <input type="checkbox" id="terms" name="terms"> I agree to the terms and conditions
+            </label>
+            <span class="error" id="termsError"></span>
+
+            <button type="submit">Submit</button>
+            <span class="success" id="successMessage"></span>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#myForm').on('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                // Clear previous messages
+                $('.error').text('');
+                $('#successMessage').text('');
+
+                // Get form values
+                const name = $('#name').val().trim();
+                const email = $('#email').val().trim();
+                const gender = $('#gender').val();
+                const password = $('#password').val();
+                const confirmPassword = $('#confirmPassword').val();
+                const terms = $('#terms').is(':checked');
+
+                let valid = true;
+
+                // Validate fields
+                if (name === '') {
+                    $('#nameError').text('Name is required.');
+                    valid = false;
+                }
+                if (email === '') {
+                    $('#emailError').text('Email is required.');
+                    valid = false;
+                }
+                if (gender === '') {
+                    $('#genderError').text('Gender is required.');
+                    valid = false;
+                }
+                if (password === '') {
+                    $('#passwordError').text('Password is required.');
+                    valid = false;
+                }
+                if (confirmPassword === '') {
+                    $('#confirmPasswordError').text('Please confirm your password.');
+                    valid = false;
+                } else if (password !== confirmPassword) {
+                    $('#confirmPasswordError').text('Passwords do not match.');
+                    valid = false;
+                }
+                if (!terms) {
+                    $('#termsError').text('You must agree to the terms and conditions.');
+                    valid = false;
+                }
+
+                // Display success message if all fields are valid
+                if (valid) {
+                    $('#successMessage').text('Form submitted successfully!');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

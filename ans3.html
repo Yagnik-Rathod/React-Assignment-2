@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f7f9fc;
+        }
+        #toggleDiv {
+            display: none; 
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #1500ff;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1500ff;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #1500ff;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="toggleButton">Toggle</button>
+    <div id="toggleDiv">This is a toggleable div!</div>
+
+    <script>
+        $(document).ready(function() {
+            $('#toggleButton').click(function() {
+                $('#toggleDiv').toggle(); 
+            });
+        });
+    </script>
+
+</body>
+</html>

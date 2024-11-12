@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ans-1</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007BFF;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        input[type="text"]:focus, input[type="email"]:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .success {
+            color: green;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1> Jquery Form</h1>
+        <form id="myForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" >
+            <span class="error" id="nameError"></span>
+
+            <label for="email">Email:</label>
+          <input type="text" id="email" name="email">
+            <span class="error" id="emailError"></span>
+
+            <button type="submit">Submit</button>
+            <span class="success" id="successMessage"></span>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#myForm').on('submit', function(event) {
+                event.preventDefault();
+                
+                $('#nameError').text('');
+                $('#emailError').text('');
+                $('#successMessage').text('');
+                const name = $('#name').val().trim();
+                const email = $('#email').val().trim();
+                let valid = true;
+                if (name === '') {
+                    $('#nameError').text('Name is required.');
+                    valid = false;
+                }
+
+                if (email === '') {
+                    $('#emailError').text('Email is required.');
+                    valid = false;
+                } else if (!/\S+@\S+\.\S+/.test(email)) {
+                    $('#emailError').text('Email is not valid.');
+                    valid = false;
+                }
+
+                if (valid) {
+                    $('#successMessage').text('Form submitted successfully!');
+                    alert('Name: ' + name + '\nEmail: ' + email);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

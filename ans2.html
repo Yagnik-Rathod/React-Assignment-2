@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State and City Dropdowns</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007BFF;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        select:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Select Location</h1>
+        <label for="state">Select State:</label>
+        <select id="state">
+            <option value="">--Select State--</option>
+            <option value="Gujrat">Gujrat</option>
+            <option value="Maharastra">Maharastra</option>
+            <option value="Rajsthan">Rajsthan</option>
+            <option value="Uttarpradesh">Uttarpradesh</option>
+        </select>
+
+        <label for="city">Select City:</label>
+        <select id="city" disabled>
+            <option value="">--Select City--</option>
+        </select>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const cities = {
+                Gujrat: ["Surat", "Ahmedabad", "Bharuch"],
+                Maharastra: ["Mumbai", "Pune", "Satara"],
+                Rajsthan: ["Jaipur", "Udaipur", "Jodhpur"],
+                Uttarpradesh: ["Kanpur", "Mirzapur", "Varanasi"]
+            };
+
+            $('#state').change(function() {
+                const selectedState = $(this).val();
+                $('#city').empty().prop('disabled', true);
+
+                if (selectedState) {
+                    $('#city').append('<option value="">--Select City--</option>');
+                    cities[selectedState].forEach(function(city) {
+                        $('#city').append(`<option value="${city}">${city}</option>`);
+                    });
+                    $('#city').prop('disabled', false);
+                } else {
+                    $('#city').append('<option value="">--Select City--</option>');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
